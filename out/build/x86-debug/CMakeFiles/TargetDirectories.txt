@@ -1,0 +1,5 @@
+C:/Users/Lukáš/source/repos/test_2048/out/build/x86-debug/CMakeFiles/edit_cache.dir
+C:/Users/Lukáš/source/repos/test_2048/out/build/x86-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Lukáš/source/repos/test_2048/out/build/x86-debug/test_2048/CMakeFiles/test_2048.dir
+C:/Users/Lukáš/source/repos/test_2048/out/build/x86-debug/test_2048/CMakeFiles/edit_cache.dir
+C:/Users/Lukáš/source/repos/test_2048/out/build/x86-debug/test_2048/CMakeFiles/rebuild_cache.dir

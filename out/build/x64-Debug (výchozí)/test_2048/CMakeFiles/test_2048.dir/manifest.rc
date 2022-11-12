@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "C:/Users/Lukáš/Desktop/test_2048/out/build/x64-Debug (výchozí)/test_2048/CMakeFiles/test_2048.dir/embed.manifest"

@@ -1,0 +1,5 @@
+C:/Users/Lukáš/Desktop/test_2048/out/build/x64-Debug (výchozí)/CMakeFiles/edit_cache.dir
+C:/Users/Lukáš/Desktop/test_2048/out/build/x64-Debug (výchozí)/CMakeFiles/rebuild_cache.dir
+C:/Users/Lukáš/Desktop/test_2048/out/build/x64-Debug (výchozí)/test_2048/CMakeFiles/edit_cache.dir
+C:/Users/Lukáš/Desktop/test_2048/out/build/x64-Debug (výchozí)/test_2048/CMakeFiles/test_2048.dir
+C:/Users/Lukáš/Desktop/test_2048/out/build/x64-Debug (výchozí)/test_2048/CMakeFiles/rebuild_cache.dir
