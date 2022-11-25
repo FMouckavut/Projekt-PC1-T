@@ -2,7 +2,7 @@
 #include "stdlib.h" // už nevím kteerá knihovna je ta správná, dal bych tam všechny...
 #include "string.h"
 
-void nacti(FILE* fp, int grid[4][4])
+void nacti(FILE* fp, int grid[5][4], int *score)
 {
     char* sp; // na rozdìlení øádku na jednotlivá èísla
     int y = 0, x = 0; // indexy øádkù a sloupcù
@@ -39,10 +39,11 @@ void nacti(FILE* fp, int grid[4][4])
 
         y++; // posune se o øádek dolù
     }
+    *score += grid[4][0];
     fclose(fp);
 }
 
-void zapis(FILE* fp, int grid[4][4]) // zapise vysledky posunu do souboru
+void zapis(FILE* fp, int grid[5][4], int *score) // zapise vysledky posunu do souboru
 {
     for (int y = 0; y < 4; y++)
     {
@@ -53,16 +54,17 @@ void zapis(FILE* fp, int grid[4][4]) // zapise vysledky posunu do souboru
             break;
         }
     }
+    fprintf(fp, "%i;0;0;0", *score);
     fclose(fp);
 }
 
 void vytvor_grid(FILE* fp) // vytvoøí nový grid s 0 pro novou hru
 {
     fp = fopen("grid.csv", "w");
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 5; i++)
     {
         fprintf(fp, "%i;%i;%i;%i", 0, 0, 0, 0);
-        if (i != 3)
+        if (i != 4)
             fprintf(fp, "\n");
     }
     fclose(fp);
