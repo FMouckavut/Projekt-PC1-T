@@ -268,7 +268,7 @@ int main()
     {
         Action(ch);
         vypis();
-        if (konec(grid))
+        if (konec(grid) == 1)
             break;
     }
 }
