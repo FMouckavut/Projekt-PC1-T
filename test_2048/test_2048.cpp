@@ -9,7 +9,6 @@
 
 int grid[5][4]; // dělalo mi to problémy, tak jsem to udělal globální, nic lepšího mě nenapadlo
 
-void Pridej(int grid[5][4]);
 void rnd_gen(int grid[5][4]);
 void Down(int grid[5][4]);
 void Up(int grid[5][4]);
@@ -21,17 +20,6 @@ int score = 0;
 FILE* fp;
 
 using namespace std;
-
-void Pridej(int grid[5][4]) // +1 všemu, používal jsem ke zkoušení věcí
-{
-    for (int y = 0; y < 4; y++)
-    {
-        for (int x = 0; x < 4; x++)
-        {
-            grid[y][x] += 1;
-        }
-    }
-}
 
 void rnd_gen(int grid[5][4]) // vytvoří nová čísla po posunutí
 {
@@ -92,7 +80,7 @@ void Action(int ch)
         }
     }
     rnd_gen(grid);
-    fp = fopen("grid.csv", "w");
+    fp = fopen("grid.txt", "w");
     zapis(fp, grid, &score);
 }
 
@@ -219,7 +207,7 @@ void Left(int grid[5][4])
     }
 }
 int konec(int grid[5][4])
-{// jestli je už konec
+{// jestli je už konec, najde 2048
     for (int i = 0; i < 4; i++) 
     {
         for (int j = 0; j < 4; j++) 
@@ -250,15 +238,13 @@ void vypis()
 
 int main()
 {
-    fp = fopen("grid.csv", "r"); // otevření souboru s argumentem r -> ke čtení
-    vytvor_grid(fp);
+    fp = fopen("grid.txt", "r"); // otevření souboru s argumentem r -> ke čtení
+    vytvor_grid(fp); // vytvoří celý nový soubor, takže nemusí existovat při zapínání poprvé
+                     // musí tam být, pokud zvolí novou hru, jinak funkce nacti
      
     // buď ta tabulka musí být v out/build/x64_Debug (výchozí)/test_2048, nebo tam musí být přesná cesta na soubor 
     // (C:/Users/Lukáš/source/repos/test_2048/gridd.csv), ale s lomítky dopředu
     // tak ne, teď to muselo být v jiné debug složce... tak jsem to hodil do všech 3 a dlabal na to
-
-    //vytvor_grid(fp);
-    //fp = fopen("grid.csv", "r"); -> tyhle dva řádky by se musely dát na začátek nové hry místo "nacti"
 
     nacti(fp, grid, &score);
 
@@ -266,9 +252,9 @@ int main()
     vypis();
     while ((ch = getch()) != 27) // loop hry do zmacknuti ESC
     {
-        Action(ch);
-        vypis();
-        if (konec(grid) == 1)
+        Action(ch); // switch s posuny podle vstupu (nahoru, dolu...)
+        vypis(); // zápis gridu do konzole
+        if (konec(grid) == 1) // skončí, když je někde buňka 2048
             break;
     }
 }

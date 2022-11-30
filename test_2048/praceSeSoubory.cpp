@@ -1,5 +1,5 @@
 #include "stdio.h"
-#include "stdlib.h" // už nevím kteerá knihovna je ta správná, dal bych tam všechny...
+#include "stdlib.h" // už nevím která knihovna je ta správná, dal bych tam všechny...
 #include "string.h"
 
 void nacti(FILE* fp, int grid[5][4], int *score)
@@ -39,7 +39,7 @@ void nacti(FILE* fp, int grid[5][4], int *score)
 
         y++; // posune se o øádek dolù
     }
-    *score += grid[4][0];
+    *score += grid[4][0]; // poslední øádek se používá jako skóre
     fclose(fp);
 }
 
@@ -60,7 +60,7 @@ void zapis(FILE* fp, int grid[5][4], int *score) // zapise vysledky posunu do so
 
 void vytvor_grid(FILE* fp) // vytvoøí nový grid s 0 pro novou hru
 {
-    fp = fopen("grid.csv", "w");
+    fp = fopen("grid.txt", "w");
     for (int i = 0; i < 5; i++)
     {
         fprintf(fp, "%i;%i;%i;%i", 0, 0, 0, 0);
