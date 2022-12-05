@@ -1,9 +1,2 @@
--game over
--vyhra
--zapis jmena
--system skore
--zapsani skore se jmenem do souboru
--start menu (nova hra/pokracovat)
--cteni vstupu sipek
--main loop
--nejake kosmeticke upravy
+je to (vicemene) hotovy
+konec šmitec
