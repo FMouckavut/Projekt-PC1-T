@@ -254,6 +254,8 @@ int konec(int grid[4][4])
 void vypis()
 {
     system("cls");
+    printf("Pro navrat do menu dejte ESC\n\n");
+
     for (int a = 0; a < 4; a++)
     { // výpis gridu do konzole
         for (int b = 0; b < 4; b++)
@@ -271,11 +273,12 @@ void hra() {
     vypis();
     while ((ch = getch()) != 27) // loop hry do zmacknuti ESC
     {
+        
         Action(ch); // switch s posuny podle vstupu (nahoru, dolu...)
         vypis(); // zápis gridu do konzole
         if (!(konec(grid))) {
             // skončí, když je někde buňka 2048
-            printf("\nzmacknete x\n");
+            printf("\nZmacknete x a potvrdte pro navrat do menu\n");
             while (getchar() != 'x');
             while (getchar() != '\n');
             break;
@@ -316,7 +319,7 @@ int main()
                 }
             }
 
-            printf("Zadejte sve jmeno (jedno slovo, bez mezer):  ");
+            printf("Zadejte sve jmeno (jedno slovo, bez mezer a jen pismena a cisla):  ");
             scanf("%s", &jmeno);
 
             fp = fopen("grid.txt", "w");
@@ -337,7 +340,7 @@ int main()
         case 'c':
             st = fopen("statistiky.txt", "r");
             stats_read(st);
-            printf("\nzmacknete x\n");
+            printf("\nZmacknete x a potvrdte pro navrat do menu\n");
             while (getchar() != 'x');
             while (getchar() != '\n');
             break;

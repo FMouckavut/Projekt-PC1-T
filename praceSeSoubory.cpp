@@ -62,7 +62,7 @@ void zapis(FILE* fp, int grid[6][4], int* score, char jmeno[50]) // zapise vysle
     fclose(fp);
 }
 
-void stats_read(FILE* st) {
+void stats_read(FILE* st) { //čtení statistik
 
     if (st == NULL) {
         return;
@@ -84,12 +84,12 @@ void stats_read(FILE* st) {
 }
 
 
-void stats_edit(FILE* st, int inp_skore, char inp_name[50]) {
+void stats_edit(FILE* st, int inp_skore, char inp_name[50]) { //zápis do statistik
     if (st == NULL) {
         st = fopen("statistiky.txt", "w");
-        fprintf(st, "%d %s\n", 400, "pan_strik");
+        fprintf(st, "%d %s\n", 400, "panstrik");
         fprintf(st, "%d %s\n", 300, "hobas");
-        fprintf(st, "%d %s\n", 200, "joe_biden");
+        fprintf(st, "%d %s\n", 200, "joebiden");
         fclose(st);
         st = fopen("statistiky.txt", "r");
     }
