@@ -2,10 +2,10 @@
 
 struct stat {
     char name[50];
-    int skore;
+    int skore,z,w;
 };
 
-void nacti(FILE* fp, int grid[5][4], int* score)
+void nacti(FILE* fp, int grid[6][4], int* score)
 {
     char* sp; // na rozd�len� ��dku na jednotliv� ��sla
     int y = 0, x = 0; // indexy ��dk� a sloupc�
@@ -46,7 +46,7 @@ void nacti(FILE* fp, int grid[5][4], int* score)
     fclose(fp);
 }
 
-void zapis(FILE* fp, int grid[5][4], int* score) // zapise vysledky posunu do souboru
+void zapis(FILE* fp, int grid[6][4], int* score, char jmeno[50]) // zapise vysledky posunu do souboru
 {
     for (int y = 0; y < 4; y++)
     {
@@ -57,14 +57,15 @@ void zapis(FILE* fp, int grid[5][4], int* score) // zapise vysledky posunu do so
             break;
         }
     }
-    fprintf(fp, "%i;0;0;0", *score);
+    fprintf(fp, "%i;0;0;0\n", *score);
+    fprintf(fp, "%s;0;0;0\n", jmeno);
     fclose(fp);
 }
 
-void stats(FILE* st) {
+void stats_read(FILE* st) {
 
     if (st == NULL) {
-        st = fopen("statistiky.txt", "w");
+        return;
     }
 
     int skore;
@@ -80,7 +81,56 @@ void stats(FILE* st) {
             break;
         }
     }
+}
 
+
+void stats_edit(FILE* st, int inp_skore, char inp_name[50]) {
+    if (st == NULL) {
+        st = fopen("statistiky.txt", "w");
+        fprintf(st, "%d %s\n", 400, "pan_strik");
+        fprintf(st, "%d %s\n", 300, "hobas");
+        fprintf(st, "%d %s\n", 200, "joe_biden");
+        fclose(st);
+        st = fopen("statistiky.txt", "r");
+    }
+
+    struct stat scoreboard[10];
+    int index = 9;
+
+    
+    
+    for (int i = 0; i != 10; i++) {
+        int helper = fscanf(st, "%d %s", &((scoreboard[i]).skore), &((scoreboard[i]).name));
+        if (helper == -1) {
+            index = i;
+            break;
+        }
+    }
+
+    for (int i = index; i != -1; i--) {
+        if (scoreboard[i].skore > inp_skore && i !=9) {
+            for (int j = index; j != i; j--) {
+                scoreboard[j].skore = scoreboard[j - 1].skore;
+                strcpy(scoreboard[j].name, scoreboard[j - 1].name);
+            }
+            scoreboard[i+1].skore = inp_skore;
+            strcpy(scoreboard[i+1].name, inp_name);
+            break;
+        }
+
+    }
+    
+    fclose(st);
+
+    st = fopen("statistiky.txt", "w");
+
+    if (index < 9) {
+        index++;
+    }
+
+    for (int i = 0; i != index; i++) {
+        fprintf(st, "%d %s\n", scoreboard[i].skore, scoreboard[i].name);
+    }
+    fclose(st);
 
 }
-// helpme = fscanf(st, "%d %s", &((scoreboard[i]).skore), &((scoreboard[i]).name));

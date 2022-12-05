@@ -195,6 +195,8 @@ int konec(int grid[4][4])
             if (grid[i][j] == 2048)
             {
                 printf("Vyhral jste!!! :)\n");
+                st = fopen("statistiky.txt", "r");
+                stats_edit(st, score, jmeno);
                 return 0;
                 
             }
@@ -244,6 +246,8 @@ int konec(int grid[4][4])
     }
 
     printf("Prohral jste!!! :(\n");
+    st = fopen("statistiky.txt", "r");
+    stats_edit(st, score, jmeno);
     return 0;
 }
 
@@ -278,9 +282,10 @@ void hra() {
         }
 
     }
-
+    
+    
     fp = fopen("grid.txt", "w");
-    zapis(fp, grid, &score);
+    zapis(fp, grid, &score, jmeno);
     fclose(fp);
     
 
@@ -289,7 +294,7 @@ void hra() {
 int main()
 {
     int x=0;
-    char  cmd, name[50];
+    char  cmd;
 
     while (x == 0)
     {
@@ -311,8 +316,8 @@ int main()
                 }
             }
 
-            printf("Zadejte sve jmeno:  ");
-            scanf("%s", &name);
+            printf("Zadejte sve jmeno (jedno slovo, bez mezer):  ");
+            scanf("%s", &jmeno);
 
             fp = fopen("grid.txt", "w");
             
@@ -331,9 +336,8 @@ int main()
             break;
         case 'c':
             st = fopen("statistiky.txt", "r");
-            
-            stats(st);
-            printf("zmacknete x\n");
+            stats_read(st);
+            printf("\nzmacknete x\n");
             while (getchar() != 'x');
             while (getchar() != '\n');
             break;

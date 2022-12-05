@@ -20,7 +20,7 @@ int Right(int grid[4][4]);
 void Action(int ch);
 void hra();
 
-
+char jmeno[50];
 int score = 0;
 FILE* fp;
 FILE* st;
