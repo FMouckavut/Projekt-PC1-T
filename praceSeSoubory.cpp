@@ -1,35 +1,34 @@
-#include "stdio.h"
-#include "stdlib.h" // už nevím kteerá knihovna je ta správná, dal bych tam všechny...
-#include "string.h"
+ï»¿#include "praceSeSoubory.h"
 
-void nacti(FILE* fp, int grid[4][4])
+struct stat {
+    char name[50];
+    int skore;
+};
+
+void nacti(FILE* fp, int grid[5][4], int* score)
 {
-    char* sp; // na rozdìlení øádku na jednotlivá èísla
-    int y = 0, x = 0; // indexy øádkù a sloupcù
+    char* sp; // na rozdï¿½lenï¿½ ï¿½ï¿½dku na jednotlivï¿½ ï¿½ï¿½sla
+    int y = 0, x = 0; // indexy ï¿½ï¿½dkï¿½ a sloupcï¿½
 
-    if (fp == NULL) // kontrola dojebání se
+    if (fp == NULL) // kontrola dojebï¿½nï¿½ se
     {
         printf("\n Nepovedlo se otevrit soubor");
         exit(0);
     }
 
-    char line[100]; // místo pro uložení jednoho øádku tabulky
+    char line[100]; // mï¿½sto pro uloï¿½enï¿½ jednoho ï¿½ï¿½dku tabulky
 
-    y = 0; // vynulování indexu øádku
+    y = 0; // vynulovï¿½nï¿½ indexu ï¿½ï¿½dku
 
     while (fgets(line, 100, fp) != NULL)
     {
-        x = 0; // vynulování indexu sloupce
+        x = 0; // vynulovï¿½nï¿½ indexu sloupce
 
-        sp = strtok(line, ";"); //oddìlá z øádku èást textu po první ; (první èíslo)
+        sp = strtok(line, ";"); //oddï¿½lï¿½ z ï¿½ï¿½dku ï¿½ï¿½st textu po prvnï¿½ ; (prvnï¿½ ï¿½ï¿½slo)
         grid[y][x] = atoi(sp);
         x++;
 
-        sp = strtok(NULL, ";"); // u dalších je NULL, pokraèuje kde skonèil
-        grid[y][x] = atoi(sp);
-        x++;
-
-        sp = strtok(NULL, ";");
+        sp = strtok(NULL, ";"); // u dalï¿½ï¿½ch je NULL, pokraï¿½uje kde skonï¿½il
         grid[y][x] = atoi(sp);
         x++;
 
@@ -37,12 +36,17 @@ void nacti(FILE* fp, int grid[4][4])
         grid[y][x] = atoi(sp);
         x++;
 
-        y++; // posune se o øádek dolù
+        sp = strtok(NULL, ";");
+        grid[y][x] = atoi(sp);
+        x++;
+
+        y++; // posune se o ï¿½ï¿½dek dolï¿½
     }
+    *score = grid[4][0];
     fclose(fp);
 }
 
-void zapis(FILE* fp, int grid[4][4]) // zapise vysledky posunu do souboru
+void zapis(FILE* fp, int grid[5][4], int* score) // zapise vysledky posunu do souboru
 {
     for (int y = 0; y < 4; y++)
     {
@@ -53,17 +57,30 @@ void zapis(FILE* fp, int grid[4][4]) // zapise vysledky posunu do souboru
             break;
         }
     }
+    fprintf(fp, "%i;0;0;0", *score);
     fclose(fp);
 }
 
-void vytvor_grid(FILE* fp) // vytvoøí nový grid s 0 pro novou hru
-{
-    fp = fopen("grid.csv", "w");
-    for (int i = 0; i < 4; i++)
-    {
-        fprintf(fp, "%i;%i;%i;%i", 0, 0, 0, 0);
-        if (i != 3)
-            fprintf(fp, "\n");
+void stats(FILE* st) {
+
+    if (st == NULL) {
+        st = fopen("statistiky.txt", "w");
     }
-    fclose(fp);
+
+    int skore;
+    char name[50];
+    system("cls");
+    for (int i = 0; i < 10; i++) {
+        int helpme;
+        helpme = fscanf(st, "%d %s", &skore, &name);
+        if (helpme == 2) {
+            printf("%d %s\n", skore, name);
+        }
+        else if (helpme == -1) {
+            break;
+        }
+    }
+
+
 }
+// helpme = fscanf(st, "%d %s", &((scoreboard[i]).skore), &((scoreboard[i]).name));

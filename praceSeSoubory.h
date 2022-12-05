@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 #include "stdio.h"
-#include "stdlib.h" // už nevím kteerá knihovna je ta správná, dal bych tam všechny...
+#include "stdlib.h" // uï¿½ nevï¿½m kteerï¿½ knihovna je ta sprï¿½vnï¿½, dal bych tam vï¿½echny...
 #include "string.h"
 
-void nacti(FILE* fp, int grid[4][4]);
-void zapis(FILE* fp, int grid[4][4]);
-void vytvor_grid(FILE* fp);
+void nacti(FILE* fp, int grid[5][4], int* score);
+void zapis(FILE* fp, int grid[5][4], int* score);
+void stats(FILE* st);
